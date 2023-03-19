@@ -9,33 +9,38 @@ function handleInput(evt) {
     elements: { delay, step, amount },
   } = evt.target;
   console.log(delay.value, step.value, amount.value);
-  createPromise();
+  createPromise()
+    .then(result => console.log(result))
+    .catch(error => console.log(error));
 }
 
 function createPromise(position, delay) {
-  delay = form.elements.delay.value;
-  let step = form.elements.step.value;
-  let amount = form.elements.amount.value;
-  position = 0;
-  
-  // setTimeout((), delay)/////
-  while (position < amount) {
-    const shouldResolve = Math.random() > 0.3;
-    delay = Number(delay);
-    step = Number(step);
-    position = Number(position);
-      
-    setTimeout(() => {
-      if (shouldResolve) {
-        console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
-      } else {
-        console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-      }
-    }, delay);
-    console.log(delay);
-    position += 1;
-    delay += step;
-  }
+  return new Promise((resolve, reject) => {
+    delay = form.elements.delay.value;
+    let step = form.elements.step.value;
+    let amount = form.elements.amount.value;
+    position = 0;
+    let delays = delay - step;
+
+    while (position < amount) {
+      const shouldResolve = Math.random() > 0.3;
+      delay = Number(delay);
+      step = Number(step);
+      position = Number(position);
+
+      setTimeout(() => {
+        if (shouldResolve) {
+          resolve(`✅ Fulfilled promise ${position} in ${delays}ms`);
+        } else {
+          reject(`❌ Rejected promise ${position} in ${delays}ms`);
+        }
+      }, delays);
+
+      position += 1;
+      delays += step;
+      console.log(delays);
+    }
+  });
 }
 
 // createPromise(2, 1500)

@@ -5,7 +5,6 @@ form.addEventListener('submit', handleInput);
 
 function handleInput(evt) {
   evt.preventDefault();
-  
 
   const {
     elements: { delay, step, amount}
@@ -16,16 +15,17 @@ createPromise();
 
 
 function createPromise(position, delay) {
-  console.log(Number(form.elements.delay.value));
-  console.log(Number(form.elements.step.value));
 
   delay = form.elements.delay.value;
-  // delay = form.elements.delay.value + form.elements.step.value * position;
-  console.log(delay);
+  step = form.elements.step.value;
   amount = form.elements.amount.value;
   position = 0;
+ 
+  delay += step*position;
+   console.log(delay);
   const shouldResolve = Math.random() > 0.3;
   while (position < amount) {
+
      setTimeout(() => {
     if (shouldResolve) {
       console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -40,28 +40,6 @@ function createPromise(position, delay) {
 }
 
 
-// let counter = 0;
-
-// while (counter < 10) {
-//   console.log("counter: ", counter);
-//   counter += 1;
-// }
-
-// function createPromise(position, delay) {
-//   const shouldResolve = Math.random() > 0.3;
-return new Promise((resolve, reject) => { 
-
-});
-
-//   position = amount.value;
-//   delay = delayStep.value;
-//   console.log(firstDelay.value);
-//   if (shouldResolve) {
-//     // Fulfill
-//   } else {
-//     // Reject
-//   }
-// }
 
 
 

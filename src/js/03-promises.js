@@ -17,12 +17,14 @@ function createPromise(position, delay) {
   let step = form.elements.step.value;
   let amount = form.elements.amount.value;
   position = 0;
-
-  delay += step * position;
-  console.log(delay);
-  const shouldResolve = Math.random() > 0.3;
+  
   // setTimeout((), delay)/////
   while (position < amount) {
+    const shouldResolve = Math.random() > 0.3;
+    delay = Number(delay);
+    step = Number(step);
+    position = Number(position);
+      
     setTimeout(() => {
       if (shouldResolve) {
         console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -30,7 +32,9 @@ function createPromise(position, delay) {
         console.log(`❌ Rejected promise ${position} in ${delay}ms`);
       }
     }, delay);
+    console.log(delay);
     position += 1;
+    delay += step;
   }
 }
 

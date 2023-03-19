@@ -13,24 +13,24 @@ function handleInput(evt) {
   console.log(delay.value, step.value, amount.value);
 
   let delayPr = Number(form.elements.delay.value);
-  let stepPr = Number(form.elements.step.value);
-  let amountPr = Number(form.elements.amount.value);
+  const stepPr = Number(form.elements.step.value);
+  const amountPr = Number(form.elements.amount.value);
 
   for (let position = 1; position <= amountPr; position++) {
-    console.log(delayPr);
   
-    createPromise(position, delayPr)
-      .then(({ position, delayPr }) =>
+    createPromise( position, delayPr)
+      .then((position, delayPr ) =>
         Notiflix.Notify.success(
           `✅ Fulfilled promise ${position} in ${delayPr}ms`
         ) 
       )
-      .catch(({ position, delayPr }) =>
+      .catch((position, delayPr ) =>
         Notiflix.Notify.failure(
           `❌ Rejected promise ${position} in ${delayPr}ms`
         )
     );
-     delayPr += stepPr;
+    delayPr += stepPr;
+    console.log(delayPr);
   }
   // evt.target.reset();
 }
@@ -41,9 +41,9 @@ function createPromise(position, delay) {
 
     setTimeout(() => {
       if (shouldResolve) {
-        resolve({ position, delay });
+        resolve(position, delay);
       } else {
-        reject({ position, delay });
+        reject(position, delay);
       }
     }, delay);
   });

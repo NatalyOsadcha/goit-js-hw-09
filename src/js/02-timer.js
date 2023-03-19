@@ -9,6 +9,7 @@ const hoursIn = document.querySelector('span[data-hours]');
 const minsIn = document.querySelector('span[data-minutes]');
 const secondsIn = document.querySelector('span[data-seconds]');
 
+
 startBtn.addEventListener('click', startTimeCounter);
 startBtn.disabled = true;
 
@@ -22,7 +23,13 @@ const options = {
   },
 };
 
-const fp = flatpickr(inputDate, options);
+flatpickr(inputDate, options);
+console.log(inputDate.value);
+let selectedDates = inputDate.value;
+console.log(selectedDates);
+
+
+
 function startTimeCounter(evt) {}
 
 function startTimer(selectedDates) {

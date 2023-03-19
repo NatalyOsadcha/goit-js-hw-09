@@ -1,0 +1,2 @@
+const e=document.querySelector("form");function t(t,o){o=e.elements.delay.value,step=e.elements.step.value,amount=e.elements.amount.value,t=0,o+=step*t,console.log(o);const n=Math.random()>.3;for(;t<amount;)setTimeout((()=>{n?console.log(`✅ Fulfilled promise ${t} in ${o}ms`):console.log(`❌ Rejected promise ${t} in ${o}ms`)}),o),t+=1}e.addEventListener("submit",(function(e){e.preventDefault();const{elements:{delay:o,step:n,amount:l}}=e.target;console.log(o.value,n.value,l.value),t()}));
+//# sourceMappingURL=03-promises.f03ac157.js.map

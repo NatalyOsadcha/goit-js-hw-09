@@ -12,6 +12,9 @@ const secondsIn = document.querySelector('span[data-seconds]');
 
 startBtn.addEventListener('click', startTimeCounter);
 startBtn.disabled = true;
+inputDate.disabled = false;
+let selectData;
+isActive = true;
 
 const options = {
   enableTime: true,
@@ -19,33 +22,30 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    startTimer(selectedDates);
+    if (selectedDates[0] <= new Date()) {
+      Notiflix.Notify.failure('Please choose a date in the future');
+    } else 
+    {
+      startBtn.disabled = false;
+      selectData = selectedDates[0];
+      }
   },
 };
 
 flatpickr(inputDate, options);
-console.log(inputDate.value);
-let selectedDates = inputDate.value;
-console.log(selectedDates);
 
+function startTimeCounter() {
 
-
-function startTimeCounter(evt) {}
-
-function startTimer(selectedDates) {
-  if (Date.now() > selectedDates[0]) {
-    alert('Please choose a date in the future');
-    return;
-  }
-
-  (startBtn.disabled = false),
     setInterval(() => {
       const currentTime = Date.now();
-      const deltaTime = selectedDates[0] - currentTime;
+      const deltaTime = selectData - currentTime;
       const { days, hours, minutes, seconds } = convertMs(deltaTime);
       updateClockFace(days, hours, minutes, seconds);
       console.log(`${days}:${hours}:${minutes}:${seconds}`);
+      document.getElementById('datetime-picker').setAttribute('disabled', 'disabled')
+      inputDate.disabled = true;
       startBtn.disabled = true;
+      
     }, 1000);
 }
 

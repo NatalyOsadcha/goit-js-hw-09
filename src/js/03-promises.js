@@ -1,3 +1,5 @@
+import Notiflix from 'notiflix';
+
 const form = document.querySelector('form');
 
 form.addEventListener('submit', handleInput);
@@ -10,8 +12,8 @@ function handleInput(evt) {
   } = evt.target;
   console.log(delay.value, step.value, amount.value);
   createPromise()
-    .then(result => console.log(result))
-    .catch(error => console.log(error));
+    .then(result => Notiflix.Notify.success(result))
+    .catch(error => Notiflix.Notify.failure(error));
 }
 
 function createPromise(position, delay) {

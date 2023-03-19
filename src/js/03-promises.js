@@ -1,20 +1,51 @@
 const form = document.querySelector('form');
-let amountCounter = 0;
+
 
 form.addEventListener('submit', handleInput);
 
 function handleInput(evt) {
   evt.preventDefault();
-  amountCounter += 1;
+  
 
   const {
     elements: { delay, step, amount}
   } = evt.target;
   console.log(delay.value, step.value, amount.value);
-
-
+createPromise();
 };
 
+
+function createPromise(position, delay) {
+  console.log(Number(form.elements.delay.value));
+  console.log(Number(form.elements.step.value));
+
+  delay = form.elements.delay.value;
+  // delay = form.elements.delay.value + form.elements.step.value * position;
+  console.log(delay);
+  amount = form.elements.amount.value;
+  position = 0;
+  const shouldResolve = Math.random() > 0.3;
+  while (position < amount) {
+     setTimeout(() => {
+    if (shouldResolve) {
+      console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+    } else {
+      console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+    }
+     },  delay);
+    position += 1;
+  }
+ 
+  
+}
+
+
+// let counter = 0;
+
+// while (counter < 10) {
+//   console.log("counter: ", counter);
+//   counter += 1;
+// }
 
 // function createPromise(position, delay) {
 //   const shouldResolve = Math.random() > 0.3;
@@ -32,16 +63,6 @@ return new Promise((resolve, reject) => {
 //   }
 // }
 
-
-// const form = document.querySelector(".register-form");
-
-// form.addEventListener("submit", (event) => {
-//   event.preventDefault();
-//   const {
-//     elements: { username, password }
-//   } = event.currentTarget;
-//   console.log(username.value, password.value);
-// });
 
 
 

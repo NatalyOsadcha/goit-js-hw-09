@@ -1,2 +1,0 @@
-!function(){var e=document.querySelector("form");e.addEventListener("submit",(function(o){o.preventDefault();var n=o.target.elements,t=n.delay,l=n.step,a=n.amount;console.log(t.value,l.value,a.value),function(o,n){n=e.elements.delay.value;var t=e.elements.step.value,l=e.elements.amount.value;n+=t*(o=0),console.log(n);var a=Math.random()>.3;for(;o<l;)setTimeout((function(){a?console.log("✅ Fulfilled promise ".concat(o," in ").concat(n,"ms")):console.log("❌ Rejected promise ".concat(o," in ").concat(n,"ms"))}),n),o+=1}()}))}();
-//# sourceMappingURL=03-promises.ac6c98b0.js.map
